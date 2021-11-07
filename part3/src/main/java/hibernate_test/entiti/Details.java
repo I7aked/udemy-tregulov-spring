@@ -31,6 +31,19 @@ public class Details
         this.detailsId = detailsId;
     }
 
+    @OneToOne(mappedBy = "details", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private Employe emp;
+
+
+    @Override
+    public String toString() {
+        return "Details{" +
+                "city='" + city + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     public String getCity() {
         return city;
     }
@@ -53,6 +66,14 @@ public class Details
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Employe getEmp() {
+        return emp;
+    }
+
+    public void setEmp(Employe emp) {
+        this.emp = emp;
     }
 
     public Details(String city, int phoneNumber, String email) {

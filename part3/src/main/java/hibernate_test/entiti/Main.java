@@ -18,21 +18,21 @@ public class Main
 
         try {
         session = factory.getCurrentSession();
-        Employe emp = new Employe("Oleg","Nikiforov", "HR",200);
-        Details details = new Details("Kras",884848,"oleg@com");
-        emp.setDetails(details);
+//        Employe emp = new Employe("Andrei","Petrov", "HR",300);
+//        Details details = new Details("Anapa",331848,"andrei@com");
+//        emp.setDetails(details);
 
         session.beginTransaction();
 //        session.save(emp);
-//        session.getTransaction().commit();
+        Details details= session.get(Details.class,4);
 
 //        int myId = emp.getId();
 //        session = factory.getCurrentSession();
 //        session.beginTransaction();
-        Employe employe =session.get(Employe.class, 1);
+            System.out.println(details);
+        session.delete(details.getEmp());
         session.getTransaction().commit();
 
-            System.out.println(employe);
 
 
         } finally {

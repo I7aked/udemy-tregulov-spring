@@ -42,7 +42,7 @@ public class Employe
         this.details = details;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "details_id")
     private Details details;
 
