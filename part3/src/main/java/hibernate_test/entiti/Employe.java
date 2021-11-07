@@ -1,9 +1,10 @@
 package hibernate_test.entiti;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity
-
 @Table(name = "employees")
 public class Employe
 {
@@ -32,6 +33,18 @@ public class Employe
 
     @Column(name = "salary")
     private int salary;
+
+    public Details getDetails() {
+        return details;
+    }
+
+    public void setDetails(Details details) {
+        this.details = details;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "details_id")
+    private Details details;
 
     public String getName() {
         return name;
@@ -81,6 +94,7 @@ public class Employe
                 ", surname='" + surname + '\'' +
                 ", department='" + department + '\'' +
                 ", salary=" + salary +
+                ", details=" + details +
                 '}';
     }
 }
