@@ -6,16 +6,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "employees")
-public class Employe
-{
-    public Employe( ) {}
+public class Employe {
 
-    public Employe(String name, String surname, String department, int salary) {
+    public Employe() {
+    }
+
+    public Employe(String name, String surname, int salary) {
         this.name = name;
         this.surname = surname;
-        this.department = department;
         this.salary = salary;
     }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,23 +29,20 @@ public class Employe
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "department")
-    private String department;
+    public Departmen getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Departmen department) {
+        this.department = department;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id")
+    private Departmen department;
 
     @Column(name = "salary")
     private int salary;
-
-    public Details getDetails() {
-        return details;
-    }
-
-    public void setDetails(Details details) {
-        this.details = details;
-    }
-
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "details_id")
-    private Details details;
 
     public String getName() {
         return name;
@@ -70,14 +68,6 @@ public class Employe
         this.surname = surname;
     }
 
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     public int getSalary() {
         return salary;
     }
@@ -94,7 +84,6 @@ public class Employe
                 ", surname='" + surname + '\'' +
                 ", department='" + department + '\'' +
                 ", salary=" + salary +
-                ", details=" + details +
                 '}';
     }
 }

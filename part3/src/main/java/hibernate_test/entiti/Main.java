@@ -4,35 +4,44 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class Main
-{
+public class Main {
 
     public static void main(String[] args) {
 
         SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employe.class)
-                .addAnnotatedClass(Details.class)
+                .addAnnotatedClass(Departmen.class)
                 .buildSessionFactory();
         Session session = null;
 
 
         try {
-        session = factory.getCurrentSession();
-//        Employe emp = new Employe("Andrei","Petrov", "HR",300);
-//        Details details = new Details("Anapa",331848,"andrei@com");
-//        emp.setDetails(details);
+            session = factory.getCurrentSession();
+            Employe emp = new Employe("Andrei", "Petrov", 30);
+            Employe emp1 = new Employe("Petr", "Visokiy", 40);
+            Employe emp2 = new Employe("Sergei", "Nizkii", 50);
 
-        session.beginTransaction();
-//        session.save(emp);
-        Details details= session.get(Details.class,4);
+            Departmen departmen = new Departmen("IT", 18, 100);
+            departmen.addEmploye(emp);
+            departmen.addEmploye(emp1);
+            departmen.addEmploye(emp2);
 
-//        int myId = emp.getId();
-//        session = factory.getCurrentSession();
-//        session.beginTransaction();
-            System.out.println(details);
-        session.delete(details.getEmp());
-        session.getTransaction().commit();
+            session.beginTransaction();
+            session.save(departmen);
 
+//            Employe emp = session.get(Employe.class,1);
+//            Employe emp2 = session.get(Employe.class,2);
+//            Employe emp3 = session.get(Employe.class,3);
+//
+//            session.delete(emp);
+//            session.delete(emp2);
+//            session.delete(emp3);
+//            Departmen departmen = session.get(Departmen.class, 1);
+//            session.delete(departmen);
+
+
+
+            session.getTransaction().commit();
 
 
         } finally {
