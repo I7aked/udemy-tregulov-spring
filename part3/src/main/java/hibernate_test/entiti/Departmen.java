@@ -26,7 +26,8 @@ public class Departmen {
         this.emps = emps;
     }
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    @OneToMany( cascade = CascadeType.ALL)
+    @JoinColumn(name =  "department_id")
     private List<Employe> emps;
 
     public Departmen(String name, int minSalary, int maxSalary) {

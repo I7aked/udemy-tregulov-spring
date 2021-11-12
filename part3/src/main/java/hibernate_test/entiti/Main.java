@@ -21,13 +21,14 @@ public class Main {
             Employe emp1 = new Employe("Petr", "Visokiy", 40);
             Employe emp2 = new Employe("Sergei", "Nizkii", 50);
 
-            Departmen departmen = new Departmen("IT", 18, 100);
-            departmen.addEmploye(emp);
-            departmen.addEmploye(emp1);
-            departmen.addEmploye(emp2);
-
             session.beginTransaction();
-            session.save(departmen);
+            Departmen departmen = session.get(Departmen.class, 2);
+//            departmen.addEmploye(emp);
+//            departmen.addEmploye(emp1);
+//            departmen.addEmploye(emp2);
+
+
+            session.delete(departmen);
 
 //            Employe emp = session.get(Employe.class,1);
 //            Employe emp2 = session.get(Employe.class,2);
